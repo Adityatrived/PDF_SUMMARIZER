@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="nav-branding">Pdf Summarizer</a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#UPLOAD" class="nav-link">Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#STEPS" class="nav-link">Working</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#faq" class="nav-link">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-link").forEach(element =>
+            element.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            })
+        );
+    </script>
+
+    <div class="container">
+
+        <div class="w-full max-w-2xl mx-auto p-4">
+            <h1 class="text-2xl font-bold mb-4 text-center" id="UPLOAD">PDF Summarizer</h1>
+
+            <form id="upload-form" class="mb-6">
+                <div class="py-8 bg-white px-2 rounded-lg shadow">
+                    <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
+                        <div class="md:flex">
+                            <div class="w-full p-3">
+                                <div
+                                    class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                                    <div class="absolute text-center">
+                                        <i class="fa fa-folder-open fa-4x text-blue-700"></i>
+                                        <p class="block text-gray-400 font-normal">Attach your PDF here</p>
+                                    </div>
+                                    <input type="file" id="pdf-input" name="pdf" accept="application/pdf"
+                                        class="h-full w-full opacity-0 cursor-pointer" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex space-x-4">
+                            <!-- Language Selection -->
+                            <select id="lang-select" name="lang" class="p-2 border rounded flex-1" required>
+
+                                <option value="bn">Bengali</option>
+                                <option value="en" selected>English</option>
+                                <option value="gu">Gujarati</option>
+                                <option value="hi">Hindi</option>
+                                <option value="kn">Kannada</option>
+                                <option value="kn">Kashmiri</option>
+                                <option value="mr">Marathi</option>
+                                <option value="or">Oriya</option>
+                                <option value="pa">Punjabi</option>
+                                <option value="ur">Urdu</option>
+
+                            </select>
+                            <!-- Summary Size -->
+                            <select id="size-select" name="size" class="p-2 border rounded flex-1" required>
+                                <option value="short">Short</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="full">Full</option>
+                            </select>
+                        </div>
+
+                        <br>
+
+
+                        <!-- Summarize Button -->
+                        <div class="flex justify-center mt-4">
+                            <button id="submit-btn" type="submit"
+                                class="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-600">
+                                Summarize
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Status & Message -->
+            <div id="message" class="text-sm text-green-600 mb-4 min-h-[1.25rem]"></div>
+
+            <!-- Summary Output -->
+            <div id="summary" class="prose max-w-none p-4 border rounded bg-gray-50 mb-4 min-h-[4rem]"></div>
+
+            <!-- Action Buttons -->
+            <div class="flex space-x-4 mb-4">
+                <button id="copy-btn" class="flex-1 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                    Copy Summary
+                </button>
+                <button id="download-btn" class="flex-1 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+                    Download Summary
+                </button>
+            </div>
+        </div>
+
+
+
+
+        <div class="bg-white" id="STEPS">
+            <div class="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
+
+                <div class="text-center">
+                    <p class="mt-4 text-sm leading-7 text-gray-500 font-regular">
+                        STEPS
+                    </p>
+                    <h3 class="text-3xl sm:text-5xl leading-normal font-extrabold tracking-tight text-gray-900">
+                        How it <span class="text-indigo-600">Works?</span>
+                    </h3>
+
+                </div>
+
+                <div class="mt-20">
+                    <ul class="">
+
+                        <li class="text-left mb-10">
+                            <div class="flex flex-row items-start">
+                                <div class="flex flex-col items-center justify-center mr-5">
+                                    <div
+                                        class="flex items-center justify-center h-20 w-20 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
+                                        1
+                                    </div>
+                                    <span class="text-gray-500">STEP</span>
+                                </div>
+                                <div class="bg-gray-100 p-5 pb-10 ">
+                                    <h4 class="text-lg leading-6 font-semibold text-gray-900">UPLOAD</h4>
+                                    <p class="mt-2 text-base leading-6 text-gray-500">
+                                        Select your PDF file by clicking the upload area or dragging and dropping the
+                                        file</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="text-left mb-10">
+                            <div class="flex flex-row items-start">
+                                <div class="flex flex-col items-center justify-center mr-5">
+                                    <div
+                                        class="flex items-center justify-center h-20 w-20 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
+                                        2
+                                    </div>
+                                    <span class="text-gray-500">STEP</span>
+                                </div>
+                                <div class="bg-gray-100 p-5 pb-10 ">
+                                    <h4 class="text-lg leading-6 font-semibold text-gray-900">SUMMARY LANGUAGE</h4>
+                                    <p class="mt-2 text-base leading-6 text-gray-500">
+                                        Choose your preferred summary language from the dropdown menu.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="text-left mb-10">
+                            <div class="flex flex-row items-start">
+                                <div class="flex flex-col items-center justify-center mr-5">
+                                    <div
+                                        class="flex items-center justify-center h-20 w-20 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
+                                        3
+                                    </div>
+                                    <span class="text-gray-500">STEP</span>
+                                </div>
+                                <div class="bg-gray-100 p-5 pb-10 ">
+                                    <h4 class="text-lg leading-6 font-semibold text-gray-900">SUMMARY LENGTH</h4>
+                                    <p class="mt-2 text-base leading-6 text-gray-500">
+                                        Select the summary length: Short, Medium, or Full.</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="text-left mb-10">
+                            <div class="flex flex-row items-start">
+                                <div class="flex flex-col items-center justify-center mr-5">
+                                    <div
+                                        class="flex items-center justify-center h-20 w-20 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
+                                        4
+                                    </div>
+                                    <span class="text-gray-500">STEP</span>
+                                </div>
+                                <div class="bg-gray-100 p-5 pb-10 ">
+                                    <h4 class="text-lg leading-6 font-semibold text-gray-900">SUMMARIZE</h4>
+                                    <p class="mt-2 text-base leading-6 text-gray-500">
+                                        Click the <span class="font-semibold">Summarize</span> button.</p>
+                                    <p class="mt-2 text-base leading-6 text-gray-500">
+                                        Wait a few seconds while your summary is generated.</p>
+
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li class="text-left mb-10">
+                            <div class="flex flex-row items-start">
+                                <div class="flex flex-col items-center justify-center mr-5">
+                                    <div
+                                        class="flex items-center justify-center h-20 w-20 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
+                                        5
+                                    </div>
+                                    <span class="text-gray-500">STEP</span>
+                                </div>
+                                <div class="bg-gray-100 p-5 pb-10 ">
+                                    <h4 class="text-lg leading-6 font-semibold text-gray-900">COPY/DOWLOAD</h4>
+                                    <p class="mt-2 text-base leading-6 text-gray-500">
+                                        Your summary will appear below. You can copy it or download it as a text file.
+                                    </p>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section class="py-10 bg-gray-50 sm:py-16 lg:py-24" id="faq">
+            <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
+                        Explore Common Questions
+                    </h2>
+                </div>
+
+                <div class="max-w-3xl mx-auto mt-8 space-y-4 md:mt-16">
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50">
+                        <button type="button" id="question1" data-state="closed"
+                            class="flex items-center justify-between w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">How many summaries can I generate each
+                                day?</span>
+                            <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="answer1" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                            <p>Our service allows up to 5 summary requests per day for the entire website, as limited by
+                                our AI service provider’s plan.
+                                This means all users share this daily quota. Once the limit is reached, no more
+                                summaries can be generated until the next day.</p>
+                        </div>
+                    </div>
+
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50">
+                        <button type="button" id="question2" data-state="closed"
+                            class="flex items-center justify-between w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">What happens if the daily summary limit
+                                is reached?</span>
+                            <svg id="arrow2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="answer2" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                            <p>If the daily limit is reached, you’ll see a message : "Today’s summary limit has been
+                                reached, New summaries will be available tomorrow."
+                                Summarization will be unavailable until the daily quota resets.</p>
+                        </div>
+                    </div>
+
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50">
+                        <button type="button" id="question3" data-state="closed"
+                            class="flex items-center justify-between w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">Which languages can I get summaries
+                                in?</span>
+                            <svg id="arrow3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="answer3" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                            <p>Our summarizer supports multiple languages, including Bengali, English, Gujarati, Hindi,
+                                Kannada, Kashmiri, Marathi, Oriya, Punjabi, and Urdu.
+                                Simply select your preferred language from the dropdown before summarizing your PDF.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50">
+                        <button type="button" id="question4" data-state="closed"
+                            class="flex items-center justify-between w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">Is my PDF safe and private?</span>
+                            <svg id="arrow4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="answer4" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                            <p>Yes. Your PDF is processed securely and is not stored after summarization.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50">
+                        <button type="button" id="question3" data-state="closed"
+                            class="flex items-center justify-between w-full px-4 py-5 sm:p-6">
+
+                            <span class="flex text-lg font-semibold text-black">What should I do if I see an error or
+                                can’t get a summary?</span>
+                            <svg id="arrow3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="answer5" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                            <p>If you see an error, it may be due to reaching the daily summary limit.
+                                Please try again the next day, or check your internet connection and try reloading the
+                                page.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <p class="text-center text-gray-600 textbase mt-9">
+                    Still have questions?
+                    <a class="cursor-pointer font-medium text-tertiary transition-all duration-200 hover:text-tertiary focus:text-tertiary hover-underline"
+                        href="#contact" style="color: black; text-decoration: underline;">Contact
+                        our support
+                    </a>
+                </p>
+
+            </div>
+
+            <script>
+                // JavaScript to toggle the answers and rotate the arrows
+                document.querySelectorAll('[id^="question"]').forEach(function (button, index) {
+                    button.addEventListener('click', function () {
+                        var answer = document.getElementById('answer' + (index + 1));
+                        var arrow = document.getElementById('arrow' + (index + 1));
+
+                        if (answer.style.display === 'none' || answer.style.display === '') {
+                            answer.style.display = 'block';
+                            arrow.style.transform = 'rotate(0deg)';
+                        } else {
+                            answer.style.display = 'none';
+                            arrow.style.transform = 'rotate(-180deg)';
+                        }
+                    });
+                });
+            </script>
+
+        </section>
+
+
+
+        <!-- Contact Section-->
+        <div class="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center sm:pt-0"
+            id="contact">
+            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+                <div class="mt-8 overflow-hidden">
+                    <div class="p-8 bg-gray-100 dark:bg-gray-800 sm:rounded-lg shadow-lg">
+                        <h1
+                            class="text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight mb-2">
+                            Get in Touch
+                        </h1>
+                        <p class="text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mb-8">
+                            I’d love to connect! Here’s how you can reach me:
+                        </p>
+
+                        <div class="space-y-6">
+                            <!-- Phone -->
+                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                <svg class="w-7 h-7 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.26 1.13a11.04 11.04 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z" />
+                                </svg>
+                                <span class="ml-4 text-xl font-semibold">91+ 1234567891</span>
+                            </div>
+                            <!-- Email -->
+                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                <svg class="w-7 h-7 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span class="ml-4 text-xl font-semibold">
+                                    mailto: your@gamil.com</span>
+                            </div>
+                            <!-- LinkedIn -->
+                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                <svg class="w-7 h-7 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.75s.79-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 10.28h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.58h-3v-9h2.88v1.23h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v5.74z" />
+                                </svg>
+                                <span class="ml-4 text-xl font-semibold">
+                                    <a href="https://www.linkedin.com/in/username" target="_blank"
+                                        class="hover:underline text-indigo-600 dark:text-indigo-400">Linkedin
+                                        Profile</a>
+                                </span>
+                            </div>
+                            <!-- GitHub -->
+                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                <svg class="w-7 h-7 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.387.6.113.793-.258.793-.577v-2.234c-3.338.726-4.033-1.415-4.033-1.415-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.304.76-1.604-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.429.369.813 1.096.813 2.211v3.285c0 .322.192.694.801.576C20.565 21.796 24 17.299 24 12c0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <span class="ml-4 text-xl font-semibold">
+                                    <a href="https://github.com/username" target="_blank"
+                                        class="hover:underline text-indigo-600 dark:text-indigo-400">Github Profile</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- jsPDF CDN for PDF generation -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+        <script src="app.js"></script>
+
+    </div>
+</body>
+
+
+<footer class="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
+    <ul class="flex items-center flex-wrap mb-6 md:mb-0">
+        <li><a href="#UPLOAD" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Upload</a></li>
+        <li><a href="#STEPS" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Working</a></li>
+        <li><a href="#faq" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">FAQ's</a></li>
+        <li><a href="#contact" class="text-sm font-normal text-gray-500 hover:underline">Contact</a></li>
+    </ul>
+    <div class="flex sm:justify-center space-x-6">
+
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                </path>
+            </svg>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </a>
+
+    </div>
+</footer>
+
+</html>
