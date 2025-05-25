@@ -9,3 +9,55 @@ A modern, full stack web application that allows users to upload PDF documents a
 - **Copy & Download**: Copy summaries to clipboard or download as text files.
 - **Daily Usage Limit**
 
+## Demo
+
+[Live App on Render](https://pdf-summarizer-by-adityatrived.onrender.com)
+
+## Tech Stack
+
+- **Backend:** Node.js, Express  
+- **Frontend:** HTML, CSS, JavaScript  
+- **API:** APYHUB API for summarization
+
+## Folder Structure
+
+PDF_SUMMARIZER/
+│
+├── public/ # Frontend files (index.html, styles.css, app.js)
+├── routes/ # Express route handlers (summarize.js)
+├── utils/ # Utility modules (pdfExtract.js)
+├── .env.example # Environment variable template
+├── .gitignore # Files/folders to ignore in git
+├── package.json # Project dependencies and scripts
+├── server.js # Main server file
+└── README.md # Project documentation
+
+
+## Getting Started
+
+### 1. Clone the Repository
+### 2. Install Dependencies
+### 3. Set Up Environment Variables
+This project uses environment variables for sensitive information like API keys.  
+A `.env.example` file is provided as a template.
+**How to use:**
+- Copy `.env.example` to `.env`
+- Open `.env` and add your own API key or other required secrets.
+   APYHUB_API_KEY=your_apyhub_api_key_here
+- Save the file. The app will now use your environment variables.
+
+### 4. Run the Application Locally
+- Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment
+
+The app is deployed on [Render](https://render.com/):
+
+- Connect your GitHub repo to Render.
+- Set the build command: `npm install`
+- Set the start command: `node server.js` or `npm start`
+- Add your environment variables (API key) in Render’s dashboard.
+- Render will provide a live URL for your app.
+  
+
+
