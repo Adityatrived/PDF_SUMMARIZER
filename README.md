@@ -21,17 +21,24 @@ A modern, full stack web application that allows users to upload PDF documents a
 
 ## Folder Structure
 
-PDF_SUMMARIZER/
+pdf-summarizer/
 │
-├── public/ # Frontend files (index.html, styles.css, app.js)
-├── routes/ # Express route handlers (summarize.js)
-├── utils/ # Utility modules (pdfExtract.js)
-├── .env.example # Environment variable template
-├── .gitignore # Files/folders to ignore in git
-├── package.json # Project dependencies and scripts
-├── server.js # Main server file
-└── README.md # Project documentation
-
+├── public/               # Frontend files (HTML, CSS, JS)
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+│
+├── routes/               # Express route handlers
+│   └── summarize.js
+│
+├── utils/                # Utility modules
+│   └── pdfExtract.js
+│
+├── .env.example          # Example environment variables file
+├── .gitignore            # Git ignore rules
+├── package.json          # Project metadata and dependencies
+├── server.js             # Main backend server file
+└── README.md             # Project documentation
 
 ## Getting Started
 
