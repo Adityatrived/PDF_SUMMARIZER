@@ -75,7 +75,7 @@ input[type="file"] {
 /*navbar*/
 
 header {
-    background-color: #1e1e33;
+    background-color: #001125;
     position: sticky;
     top: 0;
     padding: 10px 16px;
@@ -164,7 +164,7 @@ li {
         top: 70px;
         gap: 0;
         flex-direction: column;
-        background-color: #1e1e33;
+        background-color: #001125;
         width: 100%;
         text-align: center;
         transition: 0.3s;
